@@ -36,7 +36,7 @@ typedef struct parameters
 } par_t;
 
 int _printf(const char *format, ...);
-int _putchar(char c);
+int _putchar(char p);
 int print_char(va_list ap, par_t *pars);
 int print_string(va_list ap, par_t *pars);
 int print_percent(va_list ap, par_t *pars);

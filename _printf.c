@@ -19,12 +19,12 @@ int _printf(const char *format, ...)
 		return (-1);
 	if (format[0] == '%' && !format[1] == ' ' && !format[2])
 		return (-1);
-	for (c = (char *)format; *p; p++)
+	for (c = (char *)format; *c; c++)
 	{
 		init_parameters(&pars, ap);
 		if (*c != '%')
 		{
-			sum += _putchar(*p);
+			sum += _putchar(*c);
 			continue;
 		}
 		s = c;
