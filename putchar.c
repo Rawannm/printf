@@ -6,7 +6,7 @@
 *
 * Return: 1 or 0
 */
-int _putchar(int p)
+int _putchar(char p)
 {
 	int n;
 	char buf[OUTPUT_BUF_SIZE];
