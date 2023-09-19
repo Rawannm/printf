@@ -10,8 +10,8 @@ int _printf(const char *format, ...)
 {
 	int sum = 0;
 	va_list ap;
-	char *c, *s;
-	par_t pars = _PARAMS_INIT;
+	char *p, *start;
+	par_t params = PARAMS_INIT;
 
 	va_start(ap, format);
 
