@@ -10,8 +10,13 @@ int _printf(const char *format, ...)
 {
 	int sum = 0;
 	va_list ap;
+<<<<<<< HEAD
 	char *c, *s;
 	par_t pars =  _PARAMS_INIT;
+=======
+	char *p, *start;
+	par_t params = PARAMS_INIT;
+>>>>>>> 22178e8ff44aa6915c9fde5bc910302133399763
 
 	va_start(ap, format);
 

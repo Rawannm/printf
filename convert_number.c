@@ -66,6 +66,7 @@ int print_HEX(va_list ap, par_t *pars)
  *
  * Return: bytes printed
  */
+<<<<<<< HEAD
 int print_binary(va_list ap, par_t *pars)
 {
 	unsigned int x = va_arg(ap, unsigned int);
@@ -76,6 +77,18 @@ int print_binary(va_list ap, par_t *pars)
 		*--string = '0';
 	pars->unsign = 1;
 	return (p += print_number(string, pars));
+=======
+int print_binary(va_list ap, par_t *params)
+{
+	unsigned int n = va_arg(ap, unsigned int);
+	char *str = convert(n, 2, CONVERT_UNSIGNED, params);
+	int c = 0;
+
+	if (params->hashtag_flag && n)
+		*--str = '0';
+	params->unsign = 1;
+	return (c += print_number(str, params));
+>>>>>>> 22178e8ff44aa6915c9fde5bc910302133399763
 }
 
 /**

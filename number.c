@@ -58,8 +58,6 @@ int print_unsigned(va_list ap, par_t *pars)
 	return (print_number(convert(l, 10, CONVERT_UNSIGNED, pars), pars));
 }
 
-
-
 /**
  * print_address - prints address
  * @ap: argument pointer
@@ -67,6 +65,7 @@ int print_unsigned(va_list ap, par_t *pars)
  *
  * Return: bytes printed
  */
+<<<<<<< HEAD
 int print_address(va_list ap, par_t *pars)
 {
 	unsigned long int x = va_arg(ap, unsigned long int);
@@ -80,3 +79,18 @@ int print_address(va_list ap, par_t *pars)
 	return (print_number(string, pars));
 }
 
+=======
+int print_address(va_list ap, par_t *params)
+{
+	unsigned long int n = va_arg(ap, unsigned long int);
+	char *str;
+
+	if (!n)
+		return (_puts("(nil)"));
+
+	str = convert(n, 16, CONVERT_UNSIGNED | CONVERT_LOWERCASE, params);
+	*--str = 'x';
+	*--str = '0';
+	return (print_number(str, params));
+}
+>>>>>>> 22178e8ff44aa6915c9fde5bc910302133399763
