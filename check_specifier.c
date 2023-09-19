@@ -1,14 +1,14 @@
 #include "main.h"
 
 /**
- * get_specifier - finds the format func
- * @s: the format string
+ * get_specifier - format func
+ * @s: string
  *
- * Return: the number of bytes printed
+ * Return: number of bytes
  */
-int (*get_specifier(char *s))(va_list ap, par_t *params)
+int (*get_specifier(char *s))(va_list ap, par_t *pars)
 {
-	specifier_t specifiers[] = {
+	spec_t specifiers[] = {
 		{"c", print_char},
 		{"d", print_int},
 		{"i", print_int},
@@ -25,114 +25,113 @@ int (*get_specifier(char *s))(va_list ap, par_t *params)
 		{"R", print_rot13},
 		{NULL, NULL}
 	};
-	int i = 0;
+	int n = 0;
 
-	while (specifiers[i].specifier)
+	while (specifiers[n].specifier)
 	{
-		if (*s == specifiers[i].specifier[0])
+		if (*s == specifiers[n].specifier[0])
 		{
-			return (specifiers[i].f);
+			return (specifiers[n].func);
 		}
-		i++;
+		n++;
 	}
 	return (NULL);
 }
 
 /**
- * get_print_func - finds the format func
- * @s: the format string
- * @ap: argument pointer
- * @params: the parameters struct
+ * get_print_func - format func
+ * @s: string
+ * @ap: pointer
+ * @pars: struct
  *
- * Return: the number of bytes printed
+ * Return: number of bytes printed
  */
-int get_print_func(char *s, va_list ap, par_t *params)
+int get_print_func(char *s, va_list ap, par_t *pars)
 {
-	int (*f)(va_list, par_t *) = get_specifier(s);
+	int (*func)(va_list, par_t *) = get_specifier(s);
 
-	if (f)
-		return (f(ap, params));
+	if (func)
+		return (func(ap, pars));
 	return (0);
 }
 
 /**
- * get_flag - finds the flag func
- * @s: the format string
- * @params: the parameters struct
+ * get_flag - flag func
+ * @s: string
+ * @pars: struct
  *
- * Return: if flag was valid
+ * Return: if valid
  */
-int get_flag(char *s, par_t *params)
+int get_flag(char *s, par_t *pars)
 {
-	int i = 0;
+	int n = 0;
 
 	switch (*s)
 	{
 		case '+':
-			i = params->plus_flag = 1;
+			n = pars->plus_f = 1;
 			break;
 		case ' ':
-			i = params->space_flag = 1;
+			n = pars->space_f = 1;
 			break;
 		case '#':
-			i = params->hashtag_flag = 1;
+			n = pars->hashtag_f = 1;
 			break;
 		case '-':
-			i = params->minus_flag = 1;
+			n = pars->minus_f = 1;
 			break;
 		case '0':
-			i = params->zero_flag = 1;
+			n = pars->zero_f = 1;
 			break;
 	}
-	return (i);
+	return (n);
 }
 
 /**
- * get_modifier - finds the modifier func
- * @s: the format string
- * @params: the parameters struct
+ * get_modifier - modifier func
+ * @s: the string
+ * @pars: parameters stru
  *
- * Return: if modifier was valid
+ * Return: if m valid
  */
-int get_modifier(char *s, par_t *params)
+int get_modifier(char *s, par_t *pars)
 {
-	int i = 0;
+	int n = 0;
 
 	switch (*s)
 	{
 	case 'h':
-		i = params->h_modifier = 1;
+		n = pars->h_modif = 1;
 		break;
 	case 'l':
-		i = params->l_modifier = 1;
+		n = pars->l_modif = 1;
 		break;
 	}
-	return (i);
+	return (n);
 }
 
 /**
- * get_width - gets the width from the format string
- * @s: the format string
- * @params: the parameters struct
- * @ap: the argument pointer
+ * get_width - gets the width
+ * @s: string
+ * @pars: parameters
+ * @ap: pointer
  *
- * Return: new pointer
+ * Return: pointer
  */
-char *get_width(char *s, par_t *params, va_list ap)
-/* should this function use char **s and modify the pointer? */
+char *get_width(char *s, par_t *pars, va_list ap)
 {
-	int d = 0;
+	int g = 0;
 
 	if (*s == '*')
 	{
-		d = va_arg(ap, int);
+		g = va_arg(ap, int);
 		s++;
 	}
 	else
 	{
 		while (_isdigit(*s))
-			d = d * 10 + (*s++ - '0');
+			g = g * 10 + (*s++ - '0');
 	}
-	params->width = d;
+	pars->width = g;
 	return (s);
 }

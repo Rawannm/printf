@@ -1,6 +1,21 @@
 #include "main.h"
 
 /**
+* _puts - to printf
+* @string: the string
+*
+* Return: void
+*/
+int _puts(char *string)
+{
+	char *i = string;
+
+	while (*string)
+		_putchar(*string++);
+	return (string - i);
+}
+
+/**
 * _putchar - writes the char
 * @p: the char
 *
