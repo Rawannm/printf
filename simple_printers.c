@@ -2,9 +2,9 @@
 
 /**
  * print_from_to - prints a range of char addresses
- * @start: starting address
- * @stop: stopping address
- * @except: except address
+ * @start: starting
+ * @stop: stopping
+ * @except: except
  *
  * Return: number bytes printed
  */
@@ -23,16 +23,16 @@ int print_from_to(char *start, char *stop, char *except)
 
 /**
  * print_rev - prints string in reverse
- * @ap: string
- * @params: the parameters struct
+ * @arg_ptr: string
+ * @pars: the parameters struct
  *
  * Return: number bytes printed
  */
-int print_rev(va_list ap, par_t *params)
+int print_rev(va_list arg_ptr, par_t *pars)
 {
 	int len, sum = 0;
-	char *str = va_arg(ap, char *);
-	(void)params;
+	char *str = va_arg(arg_ptr, char *);
+	(void)pars;
 
 	if (str)
 	{
@@ -47,19 +47,19 @@ int print_rev(va_list ap, par_t *params)
 
 /**
  * print_rot13 - prints string in rot13
- * @ap: string
- * @params: the parameters struct
+ * @arg_ptr: string
+ * @pars: the parameters struct
  *
  * Return: number bytes printed
  */
-int print_rot13(va_list ap, par_t *params)
+int print_rot13(va_list arg_ptr, par_t *pars)
 {
 	int i, index;
 	int count = 0;
 	char arr[] =
 		"NOPQRSTUVWXYZABCDEFGHIJKLM      nopqrstuvwxyzabcdefghijklm";
-	char *a = va_arg(ap, char *);
-	(void)params;
+	char *a = va_arg(arg_ptr, char *);
+	(void)pars;
 
 	i = 0;
 	index = 0;

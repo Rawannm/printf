@@ -6,7 +6,7 @@
  *
  * Return: number of bytes
  */
-int (*get_specifier(char *s))(va_list ap, par_t *pars)
+int (*get_specifier(char *s))(va_list arg_ptr, par_t *pars)
 {
 	spec_t specifiers[] = {
 		{"c", print_char},
@@ -41,17 +41,17 @@ int (*get_specifier(char *s))(va_list ap, par_t *pars)
 /**
  * get_print_func - format func
  * @s: string
- * @ap: pointer
+ * @arg_ptr: pointer
  * @pars: struct
  *
  * Return: number of bytes printed
  */
-int get_print_func(char *s, va_list ap, par_t *pars)
+int get_print_func(char *s, va_list arg_ptr, par_t *pars)
 {
 	int (*func)(va_list, par_t *) = get_specifier(s);
 
 	if (func)
-		return (func(ap, pars));
+		return (func(arg_ptr, pars));
 	return (0);
 }
 
@@ -114,17 +114,17 @@ int get_modifier(char *s, par_t *pars)
  * get_width - gets the width
  * @s: string
  * @pars: parameters
- * @ap: pointer
+ * @arg_ptr: pointer
  *
  * Return: pointer
  */
-char *get_width(char *s, par_t *pars, va_list ap)
+char *get_width(char *s, par_t *pars, va_list arg_ptr)
 {
 	int g = 0;
 
 	if (*s == '*')
 	{
-		g = va_arg(ap, int);
+		g = va_arg(arg_ptr, int);
 		s++;
 	}
 	else

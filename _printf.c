@@ -1,32 +1,27 @@
 #include "main.h"
 
 /**
-* _printf - to print
-* @format: a character string
-*
-* Return: number of bytes
-*/
+ * _printf - prints and input into the standard output
+ * @format: the format string
+ *
+ * Return: number of bytes printed
+ */
 int _printf(const char *format, ...)
 {
 	int sum = 0;
-	va_list ap;
-<<<<<<< HEAD
+	va_list arg_ptr;
 	char *c, *s;
-	par_t pars =  _PARAMS_INIT;
-=======
-	char *p, *start;
-	par_t params = PARAMS_INIT;
->>>>>>> 22178e8ff44aa6915c9fde5bc910302133399763
+	par_t pars = pars_INIT;
 
-	va_start(ap, format);
+	va_start(arg_ptr, format);
 
 	if (!format || (format[0] == '%' && !format[1]))
 		return (-1);
-	if (format[0] == '%' && !format[1] == ' ' && !format[2])
+	if (format[0] == '%' && format[1] == ' ' && !format[2])
 		return (-1);
 	for (c = (char *)format; *c; c++)
 	{
-		init_parameters(&pars, ap);
+		init_parameters(&pars, arg_ptr);
 		if (*c != '%')
 		{
 			sum += _putchar(*c);
@@ -38,16 +33,17 @@ int _printf(const char *format, ...)
 		{
 			c++;
 		}
-		c = get_flag(c, &pars, ap);
-		c = get_percision(c, &pars, ap);
-		if (get_modif(c, &pars))
+		c = get_width(c, &pars, arg_ptr);
+		c = get_precision(c, &pars, arg_ptr);
+		if (get_modifier(c, &pars))
 			c++;
 		if (!get_specifier(c))
-			sum += print_from_to(s, c, pars.l_modif || pars.h_modif ? c - 1 : 0);
+			sum += print_from_to(s, c,
+				pars.l_modif || pars.h_modif ? c - 1 : 0);
 		else
-			sum += get_print_func(c, ap, &pars);
+			sum += get_print_func(c, arg_ptr, &pars);
 	}
 	_putchar(BUF_FLUSH);
-	va_end(ap);
+	va_end(arg_ptr);
 	return (sum);
 }

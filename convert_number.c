@@ -2,118 +2,105 @@
 
 /**
  * print_hex - unsigned hex numbers
- * @ap: pointer
+ * @arg_ptr: pointer
  * @pars: parameters
  *
  * Return: bytes
  */
-int print_hex(va_list ap, par_t *pars)
+int print_hex(va_list arg_ptr, par_t *pars)
 {
 	unsigned long l;
 	int p = 0;
-	char *string;
+	char *str_ptr;
 
-	if (pars->l_modifier)
-		l = (unsigned long)va_arg(ap, unsigned long);
-	else if (pars->h_modifier)
-		l = (unsigned short int)va_arg(ap, unsigned int);
+	if (pars->l_modif)
+		l = (unsigned long)va_arg(arg_ptr, unsigned long);
+	else if (pars->h_modif)
+		l = (unsigned short int)va_arg(arg_ptr, unsigned int);
 	else
-		l = (unsigned int)va_arg(ap, unsigned int);
+		l = (unsigned int)va_arg(arg_ptr, unsigned int);
 
-	string = convert(l, 16, CONVERT_UNSIGNED | CONVERT_LOWERCASE, pars);
+	str_ptr = convert(l, 16, CONVERT_UNSIGNED | CONVERT_LOWERCASE, pars);
 	if (pars->hashtag_f && l)
 	{
-		*--string = 'x';
-		*--string = '0';
+		*--str_ptr = 'x';
+		*--str_ptr = '0';
 	}
 	pars->unsign = 1;
-	return (p += print_number(string, pars));
+	return (p += print_number(str_ptr, pars));
 }
 
 /**
  * print_HEX - unsigned hex numbers
- * @ap: pointer
+ * @arg_ptr: pointer
  * @pars: parameters
  *
  * Return: bytes
  */
-int print_HEX(va_list ap, par_t *pars)
+int print_HEX(va_list arg_ptr, par_t *pars)
 {
 	unsigned long l;
 	int p = 0;
-	char *string;
+	char *str_ptr;
 
-	if (pars->l_modifier)
-		l = (unsigned long)va_arg(ap, unsigned long);
-	else if (pars->h_modifier)
-		l = (unsigned short int)va_arg(ap, unsigned int);
+	if (pars->l_modif)
+		l = (unsigned long)va_arg(arg_ptr, unsigned long);
+	else if (pars->h_modif)
+		l = (unsigned short int)va_arg(arg_ptr, unsigned int);
 	else
-		l = (unsigned int)va_arg(ap, unsigned int);
+		l = (unsigned int)va_arg(arg_ptr, unsigned int);
 
-	string = convert(l, 16, CONVERT_UNSIGNED, pars);
+	str_ptr = convert(l, 16, CONVERT_UNSIGNED, pars);
 	if (pars->hashtag_f && l)
 	{
-		*--string = 'X';
-		*--string = '0';
+		*--str_ptr = 'X';
+		*--str_ptr = '0';
 	}
 	pars->unsign = 1;
-	return (p += print_number(string, pars));
+	return (p += print_number(str_ptr, pars));
 }
 /**
  * print_binary - prints unsigned binary
- * @ap: pointer
+ * @arg_ptr: pointer
  * @pars: the parameters
  *
  * Return: bytes printed
  */
-<<<<<<< HEAD
-int print_binary(va_list ap, par_t *pars)
+int print_binary(va_list arg_ptr, par_t *pars)
 {
-	unsigned int x = va_arg(ap, unsigned int);
-	char *string = convert(x, 12, CONVERT_UNSIGNED, pars);
+	unsigned int x = va_arg(arg_ptr, unsigned int);
+	char *str_ptr = convert(x, 12, CONVERT_UNSIGNED, pars);
 	int p = 0;
 
 	if (pars->hashtag_f && x)
-		*--string = '0';
+		*--str_ptr = '0';
 	pars->unsign = 1;
-	return (p += print_number(string, pars));
-=======
-int print_binary(va_list ap, par_t *params)
-{
-	unsigned int n = va_arg(ap, unsigned int);
-	char *str = convert(n, 2, CONVERT_UNSIGNED, params);
-	int c = 0;
-
-	if (params->hashtag_flag && n)
-		*--str = '0';
-	params->unsign = 1;
-	return (c += print_number(str, params));
->>>>>>> 22178e8ff44aa6915c9fde5bc910302133399763
+	return (p += print_number(str_ptr, pars));
 }
 
 /**
  * print_octal - unsigned octal
- * @ap: pointer
+ * @arg_ptr: pointer
  * @pars: the parameter
  *
  * Return: bytes
  */
-int print_octal(va_list ap, par_t *pars)
+int print_octal(va_list arg_ptr, par_t *pars)
 {
 	unsigned long l;
-	char *string;
+	char *str_ptr;
 	int p = 0;
 
-	if (pars->l_modifier)
-		l = (unsigned long)va_arg(ap, unsigned long);
-	else if (pars->h_modifier)
-		l = (unsigned short int)va_arg(ap, unsigned int);
+	if (pars->l_modif)
+		l = (unsigned long)va_arg(arg_ptr, unsigned long);
+	else if (pars->h_modif)
+		l = (unsigned short int)va_arg(arg_ptr, unsigned int);
 	else
-		l = (unsigned int)va_arg(ap, unsigned int);
-	string = convert(l, 8, CONVERT_UNSIGNED, pars);
+		l = (unsigned int)va_arg(arg_ptr, unsigned int);
+	str_ptr = convert(l, 8, CONVERT_UNSIGNED, pars);
 
 	if (pars->hashtag_f && l)
-		*--string = '0';
+		*--str_ptr = '0';
 	pars->unsign = 1;
-	return (p += print_number(string, pars));
+	return (p += print_number(str_ptr, pars));
 }

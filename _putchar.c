@@ -1,42 +1,18 @@
 #include "main.h"
 
 /**
-<<<<<<< HEAD
-* _puts - to printf
-* @string: the string
-*
-* Return: void
-*/
-int _puts(char *string)
-{
-	char *i = string;
-
-	while (*string)
-		_putchar(*string++);
-	return (string - i);
-}
-
-/**
-* _putchar - writes the char
-* @p: the char
-*
-* Return: 1 or 0
-*/
-int _putchar(int p)
-=======
  * _puts - prints a string with newline
- * @str: the string to print
+ * @str_pnt: the string to print
  *
- * Return:( str-a)
+ * Return:( str_pnt-a)
  */
-int _puts(char *str)
->>>>>>> 22178e8ff44aa6915c9fde5bc910302133399763
+int _puts(char *str_pnt)
 {
-	char *a = str;/*declaration of variables*/
+	char *a = str_pnt;/*declaration of variables*/
 
-	while (*str)
-		_putchar(*str++);
-	return (str - a);
+	while (*str_pnt)
+		_putchar(*str_pnt++);
+	return (str_pnt - a);
 }
 
 /**
